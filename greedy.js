@@ -38,7 +38,7 @@ class Graph {
             let vertix = queue.splice(0, 1);
             vertix = vertix[0];
 
-            console.log("BFS====>", count++);
+            console.log("BFS====>", count++, vertix, queue);
 
             for (let i = 0; i < this.adjacents[vertix].length; i++) {
                     const adjacent = this.adjacents[vertix][i];
@@ -97,7 +97,7 @@ class Graph {
             const {d, v} = heap[0];
             visited[v] = true;
 
-            console.log("DJ====>", count++);
+            console.log("BFS====>", count++, v, heap);
 
             heap.splice(0,1);
 
@@ -132,26 +132,39 @@ class Graph {
 const graph = new Graph();
 
 
+// graph.add("A");
+// graph.add("B");
+// graph.add("C");
+// graph.add("D");
+// graph.add("E");
+// graph.add("F");
+// graph.add("G");
+
+// graph.adjacent("A", "C", 100);
+// graph.adjacent("A", "B", 3);
+// graph.adjacent("A", "D", 4);
+// graph.adjacent("D", "C", 3);
+// graph.adjacent("D", "E", 8);
+// graph.adjacent("E", "F", 10);
+// graph.adjacent("B", "G", 9);
+// graph.adjacent("E", "G", 50);
+
 graph.add("A");
 graph.add("B");
 graph.add("C");
-graph.add("D");
-graph.add("E");
-graph.add("F");
-graph.add("G");
 
-graph.adjacent("A", "C", 100);
-graph.adjacent("A", "B", 3);
-graph.adjacent("A", "D", 4);
-graph.adjacent("D", "C", 3);
-graph.adjacent("D", "E", 8);
-graph.adjacent("E", "F", 10);
-graph.adjacent("B", "G", 9);
-graph.adjacent("E", "G", 50);
+graph.adjacent("A", "C", 7);
+graph.adjacent("A", "B", 2);
+graph.adjacent("B", "C", 6);
 
 // implemented using BFS
 // doesnt work with negative values
 console.time("start");
-graph.bfs("A", "E");
-graph.dijkstra("A", "E");
+graph.bfs("A", "C");
+graph.dijkstra("A", "C");
 console.timeEnd("start");
+
+/**
+ * Dijkstra maintains heap, where the min is already calculated using sorting, 
+ * so recalculation again or loop/cycle can be eliminated.
+ */
